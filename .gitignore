@@ -1,0 +1,68 @@
+# Secret configuration and credentials
+.env
+.env.*
+.secrets/
+secrets/
+credentials/
+credentials
+.credentials/
+.git-credentials
+.netrc
+.npmrc
+credentials.json
+credentials.*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+.aws/
+.ssh/
+
+# Local agent/editor metadata
+.agents/
+.codex/
+.idea/
+.vscode/
+
+# Virtual environments and dependencies
+.venv/
+venv/
+env/
+node_modules/
+
+# Caches and generated artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+coverage/
+htmlcov/
+
+# Logs and temporary files
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*~
+
+# OS files
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Private/student data must never be published
+private/
+student-data/
+student-data.*
+students/
+students.*
+roster.*

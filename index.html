@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Python Steps Lab · Learn, type, run, build</title>
+ <link rel="stylesheet" href="python-steps.css">
+ <script defer src="python-lessons.js"></script><script defer src="python-core.js"></script>
+ <script defer src="python-runner.js"></script><script defer src="python-steps.js"></script>
+</head>
+<body>
+ <a class="skip-link" href="#main-content">Skip to learning</a>
+ <header class="lab-header">
+  <a class="brand" href="./index.html" aria-label="Python Steps Lab home"><span class="brand-mark" aria-hidden="true">&gt;_</span><span>Python Steps Lab<small>One idea. One little program.</small></span></a>
+  <div class="header-actions"><span class="save-status" id="save-status">Saved on this browser</span><span class="stars" id="stars" aria-label="Total stars">★ 0 stars</span><button id="map-button" class="quiet-button" aria-label="Back to learning map">Back to Map</button></div>
+ </header>
+ <main id="main-content" tabindex="-1">
+  <p id="notice" class="notice" role="status" aria-live="polite"></p>
+  <section id="map-view" aria-labelledby="map-title">
+   <div class="map-hero">
+    <div><p class="eyebrow">YOUR NEXT BIG IDEA STARTS SMALL</p><h1 id="map-title" tabindex="-1">Hello, future<br><span>Python maker.</span></h1><p class="hero-copy">Make Python talk. Give it ideas.<br>Then build something that is yours.</p><button id="continue-map" class="primary" aria-label="Continue learning from your next unfinished task">Continue Learning <span aria-hidden="true">→</span></button><p class="quiet">Learn → Type → Run → Fix → Build</p></div>
+    <div class="hero-program" aria-hidden="true"><div class="window-dots"><i></i><i></i><i></i><span>your_first_idea.py</span></div><pre><span class="code-comment"># Small steps. Big possibilities.</span>
+<span class="code-variable">maker</span> = <span class="code-string">"You"</span>
+print(<span class="code-string">"Hello,"</span>, maker)
+
+<span class="code-comment"># What will you build?</span></pre><div class="sample-output"><span>OUTPUT</span><p>Hello, You</p><span class="tiny-star">✦</span></div></div>
+   </div>
+   <div class="map-heading"><div><p class="eyebrow">YOUR LEARNING MAP</p><h2>Seven stops. Lots to create.</h2></div><p id="map-progress" class="quiet"></p></div>
+   <div id="unit-map" class="unit-map"></div>
+   <section class="badge-shelf" aria-labelledby="badge-title"><h2 id="badge-title">Your maker badges</h2><div id="badges"></div></section>
+   <div class="coming-soon"><span aria-hidden="true">🐢</span><div><strong>Turtle Art · Coming Soon</strong><p>Draw with code in a future adventure. Today, build with text and numbers.</p></div></div>
+  </section>
+  <section id="lesson-view" hidden aria-labelledby="lesson-title">
+   <div class="lesson-heading"><div><p class="eyebrow" id="step-position"></p><h1 id="lesson-title" tabindex="-1"></h1></div><span id="exercise-mode" class="mode-tag"></span></div>
+   <label class="progress-label" for="lesson-progress">Unit progress</label><progress id="lesson-progress" max="5" value="0"></progress>
+   <p id="preview-notice" class="notice" hidden>Teacher preview · You can edit, run, and check. This preview does not earn stars or unlock units.</p>
+   <div class="lab-workspace">
+    <section class="guide card" aria-labelledby="mission-heading">
+     <div id="project-intro" hidden></div>
+     <p class="eyebrow" id="mission-heading">YOUR MISSION</p><p class="mission" id="mission"></p>
+     <div class="concept-box"><span class="concept-label">ONE SMALL IDEA</span><p id="concept"></p></div>
+     <h2 class="small-heading">YOU NEED TO USE</h2><ul id="skills" class="skill-list"></ul>
+     <h2 class="small-heading" id="checklist-heading">SUCCESS CHECKLIST</h2><ul id="checklist" class="checklist"></ul>
+     <div id="build-section" hidden><h2 class="small-heading">SUGGESTED BUILD STEPS</h2><ol id="build-steps" class="build-steps"></ol><button id="build-next" aria-label="Check your current project build step">Check Build Step</button><p id="build-feedback" role="status"></p></div>
+     <details id="bonus-section"><summary>Bonus ideas · optional</summary><ul id="bonus-list"></ul><p id="extra-concept" class="quiet"></p></details>
+     <div class="help-actions"><button id="hint-button" aria-label="Show the next hint">Show Hint</button><button id="example-button" class="quiet-button" aria-label="Show a reference example" hidden>Show Example</button></div>
+     <section id="hint-panel" class="hint-panel" aria-live="polite" hidden><strong id="hint-label"></strong><p id="hint-text"></p><pre id="hint-code" hidden></pre></section>
+    </section>
+    <section class="code-card card" aria-labelledby="code-heading">
+     <div class="code-heading"><h2 id="code-heading"><span aria-hidden="true">⌘</span> Python Code Lab</h2><span class="file-tab">main.py</span></div>
+     <label class="sr-only" for="code-editor">Python code for this step</label>
+     <div class="editor-wrap"><pre id="line-numbers" aria-hidden="true">1</pre><textarea id="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" maxlength="12000" aria-describedby="editor-help"></textarea></div>
+     <p id="editor-help" class="editor-help">Tab adds 4 spaces. Escape leaves the editor. Ctrl / ⌘ + Enter runs code.</p>
+     <div class="code-actions"><button id="run-button" class="primary" aria-label="Run your Python code">Run Code <span aria-hidden="true">▷</span></button><button id="check-button" class="check-button" aria-label="Check your code against the task checklist">Check</button><button id="reset-code" class="quiet-button" aria-label="Reset this step to starter code">Reset Code</button></div>
+     <div class="runner-line"><p id="runner-status" role="status">Python is getting ready...</p><button id="retry-runner" class="quiet-button" aria-label="Try loading the Python runner again" hidden>Try Loading Python</button><button id="stop-run" class="quiet-button" aria-label="Stop the running program" hidden>Stop Run</button></div>
+     <details id="test-panel"><summary>Test Inputs <span id="input-summary" class="quiet"></span></summary><p id="input-help">Each input() takes the next reply in this list. These are pretend player replies.</p><div id="test-inputs"></div><button id="add-input" class="quiet-button" aria-label="Add a test input reply">+ Add Reply</button><button id="all-guesses" class="quiet-button" aria-label="Append test replies from 1 to 20 for a complete random game test" hidden>Add Replies 1–20</button></details>
+     <div class="output-heading"><h2>Output</h2><span id="output-label" class="quiet">Ready for your ideas</span></div>
+     <pre id="output" class="output" role="status" aria-live="polite" aria-atomic="true">Run your code to see what happens.</pre>
+     <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+     <details id="error-details" hidden><summary>Show Details</summary><pre id="raw-error"></pre></details>
+    </section>
+   </div>
+   <nav class="step-navigation" aria-label="Lesson navigation"><button id="previous-step" class="quiet-button" aria-label="Open the previous step">← Previous Step</button><span id="step-complete" class="quiet"></span><button id="next-step" aria-label="Open the next step" disabled>Next Step →</button></nav>
+  </section>
+  <section id="completion-view" class="completion-card card" hidden aria-labelledby="completion-title"><span class="award-icon" aria-hidden="true">✦</span><p class="eyebrow">LOOK WHAT YOU BUILT</p><h1 id="completion-title" tabindex="-1"></h1><p id="completion-message"></p><p id="completion-stars" class="stars"></p><h2 id="completion-badge"></h2><p id="completion-skills"></p><h2 class="small-heading">YOUR FINISHED PROGRAM</h2><pre id="completion-artifact"></pre><div class="completion-actions"><button id="continue-completion" class="primary" aria-label="Continue learning after completing this creation">Continue Learning →</button><button id="completion-map" aria-label="Back to learning map from your finished creation">Back to Map</button><button id="review-creation" class="quiet-button" aria-label="Review your finished code">Review My Code</button></div></section>
+  <section id="teacher-view" class="card teacher-view" hidden aria-labelledby="teacher-title"><h1 id="teacher-title" tabindex="-1">Teacher View</h1><p>Local browser progress. No login, recordings, or uploads. Preview any step without rewards.</p><p id="teacher-summary"></p><div class="teacher-actions"><button id="export-progress" aria-label="Export local progress as a JSON file">Export JSON</button><button id="reset-progress" aria-label="Reset all Python learning progress with two confirmations">Reset Progress</button><button id="close-teacher" class="quiet-button" aria-label="Close teacher view">Close Teacher View</button></div><div id="teacher-table"></div><h2>Current saved draft</h2><pre id="teacher-draft"></pre></section>
+ </main>
+ <footer><p>Use a nickname. Your code and progress stay in this browser. Python’s first load needs internet.</p><button id="teacher-button" class="quiet-button" aria-label="Open teacher view">Teacher View</button></footer>
+</body>
+</html>
