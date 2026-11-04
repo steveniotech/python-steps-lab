@@ -116,6 +116,11 @@ async function appHandlers(){
  assert.equal(saved().steps['talk-3'].hintClicks,3);assert.ok(saved().steps['guess-1'].artifact.includes('Correct!'));
  windowEvents.get('document:keydown')({key:'s',ctrlKey:true,preventDefault(){}});assert.equal(el('notice').textContent,'Your work is saved automatically.');
  await click('teacher-button');assert.ok(el('teacher-summary').textContent.includes('210 stars'));
+ const beforePreview=stored.get(C.key);
+ const previewButton=el('teacher-table').querySelectorAll('[data-preview]')[0];previewButton.onclick();
+ type('print("Preview only")');await click('hint-button');
+ assert.equal(stored.get(C.key),beforePreview,'teacher preview edits/hints must not change persistent student work');
+ await click('map-button');await click('teacher-button');
  await click('reset-progress');assert.equal(confirmations,2);assert.equal(saved().stars,0);assert.equal(Object.keys(saved().steps).length,0);assert.equal(el('map-view').hidden,false);
  console.log('App handlers passed: all 29 steps through Run/Check/navigation, project checkpoints/completion pages, 210 stars/seven badges in saved JSON, hints, duplicate checks, concurrent draft edits, keyboard save, Teacher View and double-confirmed reset. DOM and runner adapters; no real browser claim.');
 }

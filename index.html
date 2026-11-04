@@ -5,16 +5,43 @@
  <title>Python Steps Lab · Learn, type, run, build</title>
  <link rel="stylesheet" href="python-steps.css">
  <script defer src="python-lessons.js"></script><script defer src="python-core.js"></script>
- <script defer src="python-runner.js"></script><script defer src="python-steps.js"></script>
+ <script defer src="cloud-config.js"></script><script defer src="python-cloud.js"></script>
+ <script defer src="python-runner.js"></script><script defer src="python-steps.js"></script><script defer src="python-account.js"></script>
 </head>
 <body>
  <a class="skip-link" href="#main-content">Skip to learning</a>
  <header class="lab-header">
   <a class="brand" href="./index.html" aria-label="Python Steps Lab home"><span class="brand-mark" aria-hidden="true">&gt;_</span><span>Python Steps Lab<small>One idea. One little program.</small></span></a>
-  <div class="header-actions"><span class="save-status" id="save-status">Saved on this browser</span><span class="stars" id="stars" aria-label="Total stars">★ 0 stars</span><button id="map-button" class="quiet-button" aria-label="Back to learning map">Back to Map</button></div>
+  <div class="header-actions"><button id="account-button" class="quiet-button" aria-expanded="false" aria-controls="account-panel">Student Sign In</button><span class="save-status" id="save-status" role="status" aria-live="polite">Saved on this browser</span><span class="stars" id="stars" aria-label="Total stars">★ 0 stars</span><button id="map-button" class="quiet-button" aria-label="Back to learning map">Back to Map</button></div>
  </header>
  <main id="main-content" tabindex="-1">
   <p id="notice" class="notice" role="status" aria-live="polite"></p>
+  <section id="account-panel" class="card account-panel" aria-labelledby="account-title" hidden>
+   <h1 id="account-title" tabindex="-1">Your learning account</h1>
+   <p id="account-message" role="status" aria-live="polite">Sign in with the student ID and password your teacher gave you.</p>
+   <form id="login-form" class="account-form">
+    <label for="login-id">Student or teacher ID<input id="login-id" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required minlength="3" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9_-]{2,31}"></label>
+    <label for="login-password">Password<input id="login-password" name="password" type="password" autocomplete="current-password" required maxlength="128"></label>
+    <button id="login-submit" class="primary" type="submit">Sign In</button>
+    <p class="quiet">Use a nickname. Ask your teacher if you forget your password. On a shared computer, sign out when you finish.</p>
+   </form>
+   <div id="signed-in-controls" hidden><p id="account-name"></p><div class="account-actions"><button id="sync-now">Sync Now</button><button id="account-export">Download My Progress</button><button id="import-browser" hidden>Import Previous Browser Work</button><button id="sign-out" class="quiet-button">Sign Out</button></div><p id="import-help" class="quiet" hidden>Previous anonymous work on this browser stays separate. Import only if it belongs to you.</p></div>
+   <div id="sync-conflict" class="notice" hidden><p>Another tab or device has saved a different copy. Download your progress before choosing. Loading the cloud copy keeps a recovery copy on this device.</p><div class="account-actions"><button id="use-cloud">Load Cloud Copy</button><button id="use-device">Save This Device’s Copy Instead</button></div></div>
+   <section id="classroom-panel" hidden aria-labelledby="classroom-title">
+    <h2 id="classroom-title">班级学习进度</h2><p>仅显示分配给你的学生。完成状态来自学生练习记录，不是独立考试成绩。</p>
+    <button id="refresh-roster">刷新学生进度</button><p id="roster-message" role="status" aria-live="polite"></p><div id="classroom-roster"></div>
+    <h3>创建学生账号</h3><form id="create-student-form" class="account-form">
+     <label for="student-id">学生编号<input id="student-id" required minlength="3" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9_-]{2,31}" autocomplete="off" autocapitalize="none" spellcheck="false"></label>
+     <label for="student-name">昵称<input id="student-name" required maxlength="60" autocomplete="off"></label>
+     <label for="student-password">初始密码（至少12个字符）<input id="student-password" type="password" required minlength="12" maxlength="128" autocomplete="new-password"></label><button id="create-student-submit" type="submit">创建账号</button>
+    </form>
+    <h3>重置学生密码</h3><form id="reset-password-form" class="account-form">
+     <label for="reset-student">学生<select id="reset-student" required><option value="">选择学生</option></select></label>
+     <label for="new-password">新密码（至少12个字符）<input id="new-password" type="password" required minlength="12" maxlength="128" autocomplete="new-password"></label><button id="reset-password-submit" type="submit">重置密码</button>
+    </form><p id="classroom-action-message" role="status" aria-live="polite"></p>
+   </section>
+  </section>
+  <div id="learning-content">
   <section id="map-view" aria-labelledby="map-title">
    <div class="map-hero">
     <div><p class="eyebrow">YOUR NEXT BIG IDEA STARTS SMALL</p><h1 id="map-title" tabindex="-1">Hello, future<br><span>Python maker.</span></h1><p class="hero-copy">Make Python talk. Give it ideas.<br>Then build something that is yours.</p><button id="continue-map" class="primary" aria-label="Continue learning from your next unfinished task">Continue Learning <span aria-hidden="true">→</span></button><p class="quiet">Learn → Type → Run → Fix → Build</p></div>
@@ -62,8 +89,9 @@ print(<span class="code-string">"Hello,"</span>, maker)
    <nav class="step-navigation" aria-label="Lesson navigation"><button id="previous-step" class="quiet-button" aria-label="Open the previous step">← Previous Step</button><span id="step-complete" class="quiet"></span><button id="next-step" aria-label="Open the next step" disabled>Next Step →</button></nav>
   </section>
   <section id="completion-view" class="completion-card card" hidden aria-labelledby="completion-title"><span class="award-icon" aria-hidden="true">✦</span><p class="eyebrow">LOOK WHAT YOU BUILT</p><h1 id="completion-title" tabindex="-1"></h1><p id="completion-message"></p><p id="completion-stars" class="stars"></p><h2 id="completion-badge"></h2><p id="completion-skills"></p><h2 class="small-heading">YOUR FINISHED PROGRAM</h2><pre id="completion-artifact"></pre><div class="completion-actions"><button id="continue-completion" class="primary" aria-label="Continue learning after completing this creation">Continue Learning →</button><button id="completion-map" aria-label="Back to learning map from your finished creation">Back to Map</button><button id="review-creation" class="quiet-button" aria-label="Review your finished code">Review My Code</button></div></section>
-  <section id="teacher-view" class="card teacher-view" hidden aria-labelledby="teacher-title"><h1 id="teacher-title" tabindex="-1">Teacher View</h1><p>Local browser progress. No login, recordings, or uploads. Preview any step without rewards.</p><p id="teacher-summary"></p><div class="teacher-actions"><button id="export-progress" aria-label="Export local progress as a JSON file">Export JSON</button><button id="reset-progress" aria-label="Reset all Python learning progress with two confirmations">Reset Progress</button><button id="close-teacher" class="quiet-button" aria-label="Close teacher view">Close Teacher View</button></div><div id="teacher-table"></div><h2>Current saved draft</h2><pre id="teacher-draft"></pre></section>
+  <section id="teacher-view" class="card teacher-view" hidden aria-labelledby="teacher-title"><h1 id="teacher-title" tabindex="-1">Teacher View</h1><p>Progress for the current learner. Teacher preview does not earn rewards. Your class dashboard is available through your teacher account.</p><p id="teacher-summary"></p><div class="teacher-actions"><button id="export-progress" aria-label="Export local progress as a JSON file">Export JSON</button><button id="reset-progress" aria-label="Reset all Python learning progress with two confirmations">Reset Progress</button><button id="close-teacher" class="quiet-button" aria-label="Close teacher view">Close Teacher View</button></div><div id="teacher-table"></div><h2>Current saved draft</h2><pre id="teacher-draft"></pre></section>
+  </div>
  </main>
- <footer><p>Use a nickname. Your code and progress stay in this browser. Python’s first load needs internet.</p><button id="teacher-button" class="quiet-button" aria-label="Open teacher view">Teacher View</button></footer>
+ <footer><p>Use a nickname. Guest work stays in this browser. Signed-in student work syncs to your school’s cloud project when connected. Python’s first load needs internet.</p><button id="teacher-button" class="quiet-button" aria-label="Open teacher view">Teacher View</button></footer>
 </body>
 </html>

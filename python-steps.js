@@ -3,14 +3,17 @@
  const L=PythonLessons,C=PythonCore,$=id=>document.getElementById(id);
  const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
  let state=C.fresh(),storageWorks=true,storageMessage='',current=null,preview=false,teacherOpen=location.hash==='#teacher';
- let busy=false,revision=0,lastRun=null,completionTimer=null,runner=null;
+ let busy=false,revision=0,lastRun=null,completionTimer=null,runner=null,persist=null,previewRecord=null;
  const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
  try{const saved=localStorage.getItem(C.key);if(saved)state=C.normalize(JSON.parse(saved),L);}catch{storageWorks=false;storageMessage='Saved progress could not be read. This session still works. Export your work in Teacher View.';}
  function save(){
-  try{localStorage.setItem(C.key,JSON.stringify({...state,stars:C.stars(state,L),badges:C.badges(state,L)}));storageWorks=true;$('save-status').textContent='Saved on this browser';}
+  if(preview)return;
+  const data={...state,stars:C.stars(state,L),badges:C.badges(state,L)};
+  if(persist){persist(data);return;}
+  try{localStorage.setItem(C.key,JSON.stringify(data));storageWorks=true;$('save-status').textContent='Saved on this browser';}
   catch{storageWorks=false;$('save-status').textContent='Not saved · export your work';$('notice').textContent='This browser could not save your work. Keep this page open and use Export JSON in Teacher View.';}
  }
- function entry(){return C.record(state,current);}
+ function entry(){return preview?previewRecord:C.record(state,current);}
  function announce(text){$('notice').textContent=text;}
  function focus(id){$(id).focus();}
  function total(){const n=C.stars(state,L);$('stars').textContent=`★ ${n} stars`;$('stars').setAttribute('aria-label',`${n} total stars`);}
@@ -85,6 +88,7 @@
  function openLesson(step,isPreview=false,shouldFocus=true){
   if(!step||(!isPreview&&!C.unlocked(state,unitFor(step),L))){showMap();return;}
   resetOperation();current=step;preview=isPreview;teacherOpen=false;hideViews();$('lesson-view').hidden=false;
+  if(preview)previewRecord=JSON.parse(JSON.stringify(state.steps[step.id]||C.record(C.fresh(),step)));
   if(!preview){state.currentStep=step.id;state.view='lesson';}
   const unit=unitFor(step),index=unit.stepIds.indexOf(step.id),item=entry();
   $('step-position').textContent=`${unit.label} · ${unit.title} · Step ${index+1} of ${unit.stepIds.length}`;
@@ -175,7 +179,7 @@
   if(event.key==='Escape'){event.preventDefault();focus(busy?'map-button':'check-button');}
  };
  document.addEventListener('keydown',event=>{
-  if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='s'){event.preventDefault();save();announce(storageWorks?'Your work is saved automatically.':'This browser could not save. Export your work in Teacher View.');}
+  if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='s'){event.preventDefault();save();announce(persist?'Check the sync status at the top of this page.':storageWorks?'Your work is saved automatically.':'This browser could not save. Export your work in Teacher View.');}
   if((event.ctrlKey||event.metaKey)&&event.key==='Enter'&&!$('lesson-view').hidden){event.preventDefault();execute();}
  });
  $('hint-button').onclick=()=>{entry().hintClicks++;entry().hints=Math.min(3,entry().hints+1);renderHints();save();};
@@ -210,6 +214,14 @@
   $('retry-runner').hidden=status!=='failed';$('run-button').disabled=status!=='ready'||busy;
  });
  window.addEventListener('pagehide',()=>{save();runner.cancel();stopCelebration();});
+ // Account integration keeps anonymous and authenticated storage separate.
+ window.PythonLab={
+  getState:()=>C.normalize(state,L),
+  setPersistence:handler=>{persist=handler;},
+  loadState:value=>{resetOperation();state=C.normalize(value,L);current=null;preview=false;location.hash='';showMap(false);},
+  pause:()=>{resetOperation();},
+  exportState:()=>$('export-progress').onclick()
+ };
  if(teacherOpen)showTeacher();
  else if(state.view==='lesson')openLesson(L.steps.find(step=>step.id===state.currentStep),false,false);
  else showMap(false);

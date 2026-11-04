@@ -1,0 +1,7 @@
+# Local stack identity only; remote commands must also specify --project-ref.
+project_id = "omqknvspgjbfgjfefpqe"
+
+[functions.classroom-admin]
+# The handler verifies the user's token against Auth before every operation.
+# This also supports projects using the new publishable/secret API keys.
+verify_jwt = false
