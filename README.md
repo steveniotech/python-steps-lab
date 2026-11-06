@@ -8,7 +8,9 @@
 
 教师角色与学生归属由数据库和服务端鉴权决定。前端只包含公开 publishable key；管理凭证只由托管函数读取。没有自助注册、邮件找回密码或 OAuth 登录界面。
 
-发布来源、检查门槛和回滚方式见 [PUBLISHING.md](docs/PUBLISHING.md)。运行 `node test-cloud.js` 验证本地账号/同步适配器；运行 `node scripts/build-site.mjs` 校验并生成仅包含9个网页资源的 `dist/`。现有 Pages 使用 main 的根目录，发布时必须提交根目录资源。下方“不需要账号/不上传”说明适用于匿名模式；登录学生的练习状态会发送至指定 Supabase 项目。实际账号验证报告保留在本机，不包含在公开发布中。
+发布来源、检查门槛和回滚方式见 [PUBLISHING.md](docs/PUBLISHING.md)。运行 `node test-cloud.js` 验证本地账号/同步适配器；运行 `node scripts/build-site.mjs` 校验并生成仅包含11个网页资源的 `dist/`（包括品牌 CSS 和 Logo）。现有 Pages 使用 main 的根目录，发布时必须提交根目录资源。下方“不需要账号/不上传”说明适用于匿名模式；登录学生的练习状态会发送至指定 Supabase 项目。实际账号验证报告保留在本机，不包含在公开发布中。
+
+当前 io TECH 品牌适配仅在本地，尚未提交或发布。预览、修改前基线、实际验证结果及限制见 [BRAND_ADAPTATION.md](docs/BRAND_ADAPTATION.md)。运行 `node scripts/serve-brand-review.mjs`，打开 http://127.0.0.1:8773/python-steps-lab/；运行 `node scripts/check-brand-review.mjs` 核对精确资源与路由，增加 `--http` 才会请求运行中的服务。品牌样式在 `brand.css`，不会改写课程、运行器、评分或账号脚本。
 
 An independent Python playground for first-time coders aged 10–12. Open **`index.html`** directly, or use Live Server / the static-server command below and open the server root. No build, installation, account, or API key is needed.
 

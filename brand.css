@@ -1,0 +1,174 @@
+/* io TECH brand layer. Course layout, editor and learning behavior stay intact. */
+:root{
+  color-scheme:light;
+  font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:#12345d;background:#f1f7ff;
+  --brand-blue:#0072ef;
+  --brand-dark-blue:#013a91;
+  --brand-orange:#ff7d01;
+  --brand-green:#00bd6a;
+  --action:#0066da;
+  --action-hover:#0056bb;
+  --ink:#12345d;
+  --muted:#48617d;
+  --paper:#f1f7ff;
+  --white:#ffffff;
+  --border:#d9e6f6;
+  --blue-tint:#e6f1ff;
+  --orange-tint:#fff0de;
+  --green-tint:#e4f8ee;
+  --focus:#013a91;
+  --green:var(--action);
+  --space-1:8px;
+  --space-2:16px;
+  --space-3:24px;
+  --space-4:32px;
+  --space-5:48px;
+  --radius-card:22px;
+  --radius-button:13px;
+  --shadow:0 5px 18px #12345d09;
+}
+body{-webkit-text-size-adjust:100%}
+h1,h2,h3{color:var(--brand-dark-blue)}
+a{color:var(--brand-dark-blue)}
+button{border-color:var(--border);border-radius:var(--radius-button);color:var(--ink)}
+button:hover:not(:disabled),.quiet-button:hover:not(:disabled){background:var(--blue-tint)}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{
+  outline:3px solid var(--focus);outline-offset:4px;box-shadow:0 0 0 2px var(--white);
+}
+h1:focus{outline-color:var(--focus)}
+.lab-header{
+  display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;
+  align-items:center;gap:var(--space-1);padding:10px var(--space-3) 12px;
+  background:var(--white);border:1px solid var(--border);border-top:0;
+  border-radius:0 0 var(--radius-card) var(--radius-card);
+}
+.brand{display:block;width:150px;max-width:100%;line-height:0}
+.brand-logo{display:block;width:100%;height:auto;background:var(--white)}
+.header-actions{justify-content:center;gap:var(--space-1);max-width:100%}
+.header-actions button,.hub-link{font-size:13px;min-height:44px;padding:10px 14px}
+.hub-link{
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:var(--radius-button);background:var(--blue-tint);
+  text-decoration:none;font-weight:650;line-height:1.4;
+}
+.hub-link:hover{background:#d6e8ff}
+.primary{background:var(--action);border-color:var(--action);color:var(--white)}
+.primary:hover:not(:disabled){background:var(--action-hover);border-color:var(--action-hover)}
+.stars{background:var(--orange-tint);color:#753900}
+.eyebrow,.concept-label{color:var(--muted)}
+.card,.unit-card{border-radius:var(--radius-card);box-shadow:var(--shadow)}
+.unit-card.locked{background:#edf2f7}
+.unit-card.project{background:var(--orange-tint);border-color:#e8d5ba}
+.unit-icon{background:var(--blue-tint)}
+.unit-card:nth-child(3n+2) .unit-icon{background:var(--green-tint)}
+.unit-card:nth-child(3n) .unit-icon{background:var(--orange-tint)}
+.maker-badge{background:var(--green-tint);border-color:#c1e5d3;color:#087447}
+.coming-soon,.mode-tag,.concept-box{background:var(--blue-tint)}
+.skill-list li{background:var(--blue-tint);border-color:var(--border)}
+.checklist li:before{color:var(--brand-dark-blue)}
+.notice,.hint-panel{background:var(--orange-tint);color:#753900}
+.check-button{background:var(--blue-tint);border-color:#93b9e8}
+progress,progress::-webkit-progress-bar{background:var(--blue-tint)}
+progress::-webkit-progress-value{background:var(--action)}
+progress::-moz-progress-bar{background:var(--action)}
+.hero-program{
+  min-width:0;background:#f8fbff;color:var(--ink);
+  border:1px solid var(--border);border-radius:18px;
+  box-shadow:10px 12px 0 #dceaff;overflow:hidden;
+}
+.window-dots{border-bottom:1px solid var(--border);background:#edf4fc}
+.window-dots i{background:#9ab8d7}
+.window-dots span{color:var(--muted)}
+.code-comment{color:#5c758f;font-style:italic}
+.code-string{color:#a34e00}
+.code-variable{color:#0056b8}
+.sample-output{background:#edf4fc;border:1px solid var(--border);color:var(--ink)}
+.sample-output>span:first-child{color:var(--muted)}
+.tiny-star{color:var(--brand-orange)}
+/* Practice page editor: unified light blue-white theme */
+.lab-workspace>*,.editor-wrap{min-width:0}
+.editor-wrap{
+  background:#f8fbff;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+.editor-wrap:focus-within{
+  border-color:var(--action);
+  box-shadow:0 0 0 3px rgba(0,102,218,0.18);
+}
+#line-numbers{
+  background:#edf4fc;
+  color:#48688a;
+  border-right:1px solid var(--border);
+}
+#code-editor{
+  background:#f8fbff;
+  color:#0f2d4a;
+  caret-color:var(--action);
+  scrollbar-color:#b8d1ea #f8fbff;
+}
+#code-editor::selection{
+  background:#cce3ff;
+  color:#0a2540;
+}
+#code-editor::-moz-selection{
+  background:#cce3ff;
+  color:#0a2540;
+}
+#code-editor::-webkit-scrollbar{
+  width:10px;height:10px;
+}
+#code-editor::-webkit-scrollbar-track{
+  background:#f8fbff;
+}
+#code-editor::-webkit-scrollbar-thumb{
+  background:#b8d1ea;
+  border-radius:5px;
+  border:2px solid #f8fbff;
+}
+#code-editor::-webkit-scrollbar-thumb:hover{
+  background:#90b8df;
+}
+.code-heading h2 span{color:var(--muted)}
+.file-tab,#test-panel{background:var(--blue-tint)}
+.input-row input{border-color:var(--border);color:var(--ink)}
+.output-heading{flex-wrap:wrap}
+.output{
+  background:#f8fbff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:#0f2d4a;
+  scrollbar-color:#b8d1ea #f8fbff;
+}
+.output::-webkit-scrollbar{
+  width:10px;height:10px;
+}
+.output::-webkit-scrollbar-track{
+  background:#f8fbff;
+}
+.output::-webkit-scrollbar-thumb{
+  background:#b8d1ea;
+  border-radius:5px;
+  border:2px solid #f8fbff;
+}
+.output::-webkit-scrollbar-thumb:hover{
+  background:#90b8df;
+}
+#raw-error{
+  background:#fff7f0;
+  border:1px solid #ffd8b8;
+  border-radius:8px;
+  color:#753900;
+}
+.feedback.success{background:var(--green-tint);border:1px solid #b7ebd1;color:#087447}
+.feedback.error{background:var(--orange-tint);border:1px solid #ffd8b8;color:#753900}
+.teacher-view th{background:var(--blue-tint)}
+.account-form input,.account-form select{color:var(--ink)}
+@media(max-width:600px){
+  .lab-header{padding:10px var(--space-2) 12px;gap:6px}
+  .brand{width:132px}
+  .header-actions{width:100%;justify-content:center;gap:6px}
+  .header-actions button,.hub-link{padding:10px;font-size:12px}
+  .code-actions .primary{flex:1 1 160px;gap:12px;white-space:nowrap}
+}

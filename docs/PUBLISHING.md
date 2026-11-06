@@ -6,9 +6,9 @@
 
 ## 本次文件来源
 
-根目录 index.html 是正式入口。它通过相对路径加载课程、运行器、样式及 cloud-config.js、python-cloud.js、python-account.js。发布需要提交更新后的根目录资源；只生成 dist/ 不会更新本网站。
+根目录 index.html 是正式入口。它通过相对路径加载课程、运行器、样式及 cloud-config.js、python-cloud.js、python-account.js。本地品牌适配另外引用 brand.css 和 assets/io-tech-center-logo.png，仍待本次设计确认及发布授权。发布需要提交更新后的根目录资源；只生成 dist/ 不会更新本网站。
 
-`node scripts/build-site.mjs` 用于本地校验和生成仅含9个静态资源的 dist/，不会自行推送或发布。它核对 Supabase 项目、公开 key 格式、正式路径启用条件及凭证特征。不要把管理员密钥、密码、JWT 或 session 放进源码、构建产物或 Git。
+`node scripts/build-site.mjs` 用于本地校验和生成仅含11个静态资源的 dist/，不会自行推送或发布。白名单精确新增品牌 CSS 与 PNG，图片按二进制复制；拒绝意外文件、目录和符号链接，不扩大为整个项目目录。它核对 Supabase 项目、公开 key 格式、正式路径启用条件及凭证特征。不要把管理员密钥、密码、JWT 或 session 放进源码、构建产物或 Git。
 
 前端仅在正式 origin 的 /python-steps-lab 路径下及 http://127.0.0.1:8000 启用云端。其他同域项目路径不启用。classroom-admin 允许上述两个精确 origin，所有管理请求仍验证 Auth 身份、数据库教师角色和学生归属；没有通配来源。
 
